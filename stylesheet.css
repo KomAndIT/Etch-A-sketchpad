@@ -18,7 +18,19 @@ footer {
 
 #input_container{
     
-    width: 15em;
+    display: flex;
+    flex-direction: column;
+    width: 25em;
+    padding: 0em 2em;
+    text-align: center;
+    
+    
+}
+
+#input_container > p{
+    margin-top: 1.5em;
+    font-size: xx-large;
+    
 }
 
 #grid_container{
@@ -28,6 +40,12 @@ footer {
     flex-direction: column;
 
     
+}
+
+button, input{
+    margin-top: 1em;
+    height: 3em;
+    border-radius: 5%;
 }
 
 .grid-row, .grid-item{

@@ -78,17 +78,24 @@ function eraseAllPaintedDivs(parentElement) {
 }
 
 function createGrid(length) {
-    for (let row = 0; row < length; row++) {
-        const gridRow = document.createElement('div');
-        gridRow.classList.add("grid-row");
-        for (let column = 0; column < length; column++) {
-            const gridColumn = document.createElement('div');
-            gridColumn.classList.add("grid-item");
-            gridColumn.style.backgroundColor = "rgb(255, 255, 255)";
-            gridRow.appendChild(gridColumn);
+    if (length <2) {
+        window.alert("WARNING: minimun side length is: 2")
+    } else if (length > 100) {
+        window.alert("WARNING: maximum side length is: 100")
+    } else {
+        for (let row = 0; row < length; row++) {
+            const gridRow = document.createElement('div');
+            gridRow.classList.add("grid-row");
+            for (let column = 0; column < length; column++) {
+                const gridColumn = document.createElement('div');
+                gridColumn.classList.add("grid-item");
+                gridColumn.style.backgroundColor = "rgb(255, 255, 255)";
+                gridRow.appendChild(gridColumn);
+            }
+            grid.appendChild(gridRow);
         }
-        grid.appendChild(gridRow);
     }
+
 }
 
 function removeAllChildNodes(parent) {
