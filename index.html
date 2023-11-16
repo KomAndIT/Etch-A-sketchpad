@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sketch</title>
+    <link rel="stylesheet" href="stylesheet.css">
+    <script src="javascript.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1 id="title">Sketch a Pad(What?)</h1>
+    </header>
+    <div id="gen_container">
+        <div id="input_container">
+            <p>Set the length of the side.</p>
+            <input type="number" min="2" max="100">
+            <button id="side_length"> Submit</button>
+            <button id="switchToColor">Colored </button>
+            <button id="switchToBlack">Black </button>
+            <button id="erase">Erase on hover painted spots</button>
+            <button id="eraseAll"> Erase at once all painted spots</button>
+        </div>
+        <div id="grid_container"></div>
+    </div>
+    <footer>Copyright Odin project 2023</footer>
+</body>
+</html>
