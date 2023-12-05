@@ -45,14 +45,37 @@ function colorGridDivs(isColored) {
         gridItem.addEventListener('mouseover', (item) => {
             console.log("isColored is: " + isCurrentColored)
             if (isColored) {
-                item.target.style.backgroundColor = randomRgbColor();
+                let transparency = increaseTransparency(item).toString();
+                let backgroundColor = item.target.style.backgroundColor;
+                if(backgroundColor !== "rgb(255, 255, 255)"){
+                    let rgbaParts = backgroundColor.substr(0, 18);
+                    console.log("rgbaParts: " + rgbaParts);
+                    const increasedBackgroundColor =  rgbaParts+transparency+')';
+                    console.log("increased background color is : " + increasedBackgroundColor);
+                    item.target.style.backgroundColor = increasedBackgroundColor;
+                }else{
+                    item.target.style.backgroundColor = randomRgbColor(transparency);
+                }
+                
             } else {
-                console.log("entering black")
-                item.target.style.backgroundColor = "rgb(0, 0, 0)";
+                let transparency = increaseTransparency(item);
+                item.target.style.backgroundColor = "rgba(0, 0, 0,"+transparency+")";//black
             }
-
         });
     });
+}
+
+function increaseTransparency(item) {
+    console.log("background color is: " + item.target.style.backgroundColor);
+    let transparency = parseFloat(item.target.getAttribute("transparency"));
+    console.log("transparency is: " + transparency);
+    if (transparency < 1) {
+        item.target.setAttribute("transparency", transparency + 0.1);
+    }
+    if (transparency > 1) {
+        item.target.setAttribute("transparency", 1);
+    }
+    return transparency;
 }
 
 function erasePaintedDivs() {
@@ -89,6 +112,7 @@ function createGrid(length) {
             for (let column = 0; column < length; column++) {
                 const gridColumn = document.createElement('div');
                 gridColumn.classList.add("grid-item");
+                gridColumn.setAttribute("transparency",0.1)
                 gridColumn.style.backgroundColor = "rgb(255, 255, 255)";
                 gridRow.appendChild(gridColumn);
             }
@@ -105,9 +129,9 @@ function removeAllChildNodes(parent) {
     }
 }
 
-function randomRgbColor() {
+function randomRgbColor(transparency) {
     let r = Math.floor(Math.random() * 256); // Random between 0-255
     let g = Math.floor(Math.random() * 256); // Random between 0-255
     let b = Math.floor(Math.random() * 256); // Random between 0-255
-    return 'rgb(' + r + ',' + g + ',' + b + ')';
+    return 'rgba(' + r + ',' + g + ',' + b + ','+transparency+')';
 };
