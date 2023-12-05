@@ -1,9 +1,4 @@
 const grid = document.querySelector("#grid_container");
-// const sideLength = document.querySelector("#side_length");
-// const switchToColor = document.querySelector("#switchToColor");
-// const switchToBlack = document.querySelector("#switchToBlack");
-// const eraseBtn = document.querySelector("#erase");
-// const eraseAllBtn = document.querySelector("#eraseAll");
 const inputContainer = document.querySelector("#input_container");
 
 var currentSideLength = 16;
@@ -11,13 +6,6 @@ var isCurrentColored = false;
 
 createGrid(currentSideLength);
 colorGridDivs(isCurrentColored);
-
-// sideLength.addEventListener("click", () => {
-//     removeAllChildNodes(grid);
-//     currentSideLength = document.querySelector("input").value;
-//     createGrid(currentSideLength);
-//     colorGridDivs(isCurrentColored);
-// });
 
 inputContainer.addEventListener('click', (event) => {
     let target = event.target;
@@ -43,9 +31,7 @@ inputContainer.addEventListener('click', (event) => {
             erasePaintedDivs();
             break;
         case 'eraseAll':
-            removeAllChildNodes(grid);
-            createGrid(currentSideLength);
-            colorGridDivs(isCurrentColored);
+            resetAllDivsToDefault();
             break;
     }
 });
@@ -69,7 +55,7 @@ function colorGridDivs() {
             } else {
                 console.log("enter not colored")
                 let transparency = increaseTransparency(item);
-                item.target.style.backgroundColor = "black";//black
+                item.target.style.backgroundColor = "black";
                 item.target.style.opacity = transparency;
             }
         });
@@ -97,21 +83,9 @@ function erasePaintedDivs() {
     gridItem.forEach((gridItem) => {
         gridItem.addEventListener('mouseover', (item) => {
             item.target.style.backgroundColor = "white";
-
+            item.target.style.opacity = 0.1;
         });
     });
-}
-
-function eraseAllPaintedDivs(parentElement) {
-    console.log("removing clore node");
-    while (parentElement.firstChild) {
-        console.log("removing clore node");
-        const secondChild = parentElement.firstChild.firstChild;
-        while (secondChild.firstChild) {
-            console.log("removing clore node");
-            firstChild.target.style.backgroundColor = "white";
-        }
-    }
 }
 
 function createGrid(length) {
@@ -135,6 +109,15 @@ function createGrid(length) {
     }
 
 }
+
+function resetAllDivsToDefault() {
+    const gridItem = document.querySelectorAll(".grid-item");
+    gridItem.forEach((gridItem) => {
+            gridItem.style.backgroundColor = "white";
+            gridItem.style.opacity = 0.1;
+    });
+};
+
 
 function removeAllChildNodes(parent) {
     while (parent.firstChild) {
